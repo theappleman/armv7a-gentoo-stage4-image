@@ -30,3 +30,8 @@ stage4/boot/uImage: uImage
 stage4/boot/devicetree.dtb: zynq-parallella1-headless.dtb
 	@test -d stage4/boot || mkdir -p stage4/boot
 	cp $< $@
+
+stage3-armv7a_hardfp-latest.tar.bz2:
+	@echo Download the tarball from the following url and name it $@:
+	@echo http://distfiles.gentoo.org/releases/arm/autobuilds/current-stage3-armv7a_hardfp/
+	@exit 1
