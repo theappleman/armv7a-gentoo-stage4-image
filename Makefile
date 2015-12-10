@@ -1,7 +1,7 @@
 STAGE4 = $(shell find stage4/ -type f)
 
 parallella.img.bz2: parallella.img
-	bzip2 -k $<
+	bzip2 -kf $<
 
 parallella.img: $(STAGE4) stage3-armv7a_hardfp-latest.tar.bz2 stage4/boot/parallella.bit.bin stage4/boot/uImage stage4/boot/devicetree.dtb authorized_keys
 	@test -d stage4/boot || mkdir -p stage4/boot
