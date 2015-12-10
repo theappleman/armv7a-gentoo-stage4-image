@@ -1,0 +1,7 @@
+/stage4/boot
+*.bz2
+*.dtb
+*.img
+*.bit.bin
+uImage
+authorized_keys
