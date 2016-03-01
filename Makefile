@@ -1,7 +1,8 @@
 STAGE4 = $(shell find stage4/ -type f)
 
 parallella.img.bz2: parallella.img
-	bzip2 -kf $<
+	bzip2 -kfp $<
+	@echo
 
 parallella.img: stage3-armv7a_hardfp-latest.tar.bz2 stage4/boot/parallella.bit.bin stage4/boot/uImage stage4/boot/devicetree.dtb $(STAGE4)
 	./.gfwrapper.sh $@ $< stage4
