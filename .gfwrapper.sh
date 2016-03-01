@@ -14,5 +14,4 @@ gf=$(which guestfish)
 	mount /dev/sda1 /boot : \
 	-tar-in - / : \
 	umount /boot : umount / : \
-	fsck ext4 /dev/sda2 : \
 	resize2fs-M /dev/sda2
