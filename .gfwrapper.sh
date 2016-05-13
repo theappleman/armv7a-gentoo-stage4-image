@@ -7,7 +7,7 @@ fi
 gf=$(which guestfish)
 
 (cd "$3"; tar c --owner=0 --group=0 .) | "$gf" \
-	-N "$1"=bootroot:vfat:ext4:1280M:256M:mbr -- \
+	-N "$1"=bootroot:vfat:ext4:1536M:256M:mbr -- \
 	set-label /dev/sda1 BOOT : \
 	mount /dev/sda2 / : \
 	tar-in "$2" / compress:bzip2 : \
