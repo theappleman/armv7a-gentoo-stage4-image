@@ -6,7 +6,7 @@ parallella.img.bz2: parallella.img
 	touch $@
 
 parallella.img: stage3-armv7a_hardfp-latest.tar.bz2 stage4/boot/parallella.bit.bin stage4/boot/uImage stage4/boot/devicetree.dtb $(STAGE4)
-	./.gfwrapper.sh $@ $< stage4
+	./.gfwrapper.sh $@ $< stage4 || rm -f $@
 
 stage4/boot/parallella.bit.bin: parallella_e16_headless_gpiose_7010.bit.bin
 	@test -d stage4/boot || mkdir -p stage4/boot
