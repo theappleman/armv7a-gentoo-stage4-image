@@ -22,6 +22,6 @@ stage4/boot/devicetree.dtb: zynq-parallella-$(VERSION).dtb
 	cp $< $@
 
 stage3-armv7a_hardfp-latest.tar.bz2:
-	@echo Download the tarball from the following url and name it $@:
-	@echo http://distfiles.gentoo.org/releases/arm/autobuilds/current-stage3-armv7a_hardfp/
-	@exit 1
+	export getpath=$$(wget -q -O- http://distfiles.gentoo.org/releases/arm/autobuilds/latest-stage3-armv7a_hardfp.txt | awk 'NR==3{print$$1}'); \
+	wget -c http://distfiles.gentoo.org/releases/arm/autobuilds/$$getpath; \
+	ln -s $$(basename $$getpath) $@
