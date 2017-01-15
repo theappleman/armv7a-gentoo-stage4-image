@@ -1,7 +1,7 @@
 STAGE4 = $(shell find stage4/ -type f)
 VERSION ?= headless
 
-parallella.img.bz2: parallella.img
+%.img.bz2: %.img
 	bzip2 -kfp $<
 	@echo
 	touch $@
