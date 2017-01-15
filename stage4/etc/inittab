@@ -44,7 +44,7 @@ c5:2345:respawn:/sbin/agetty 38400 tty5 linux
 c6:2345:respawn:/sbin/agetty 38400 tty6 linux
 
 # SERIAL CONSOLES
-s0:12345:respawn:/sbin/agetty -L 9600 ttyPS0 vt100
+s0:12345:respawn:/sbin/agetty -L 115200 ttyPS0 vt100
 #s1:12345:respawn:/sbin/agetty -L 9600 ttyS1 vt100
 
 # What to do at the "Three Finger Salute".
