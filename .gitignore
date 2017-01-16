@@ -5,3 +5,6 @@
 *.bit.bin
 uImage
 authorized_keys
+bootcode.bin
+start*.elf
+fixup*.dat
