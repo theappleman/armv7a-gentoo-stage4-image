@@ -3,5 +3,6 @@
 *.dtb
 *.img
 *.bit.bin
+*.itb
 uImage
 authorized_keys
