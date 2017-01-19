@@ -1,0 +1,6 @@
+[submodule "parallella/parabuntu"]
+	path = parallella/parabuntu
+	url = https://github.com/parallella/parabuntu
+[submodule "parallella/parallella-linux"]
+	path = parallella/parallella-linux
+	url = https://github.com/parallella/parallella-linux
