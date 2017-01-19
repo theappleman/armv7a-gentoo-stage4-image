@@ -22,6 +22,12 @@ stage4/boot/devicetree.dtb: zynq-parallella-$(VERSION).dtb
 	@test -d stage4/boot || mkdir -p stage4/boot
 	cp $< $@
 
+parallella_e16_microserver_gpiose_70%0.bit.bin: parallella_e16_headless_gpiose_70%0.bit.bin
+	cp $< $@
+
+zynq-parallella-hdmi.dtb: zynq-parallella.dtb
+	cp $< $@
+
 stage3-armv7a_hardfp-latest.tar.bz2:
 	export getpath=$$(wget -q -O- http://distfiles.gentoo.org/releases/arm/autobuilds/latest-stage3-armv7a_hardfp.txt | awk 'NR==3{print$$1}'); \
 	wget -c http://distfiles.gentoo.org/releases/arm/autobuilds/$$getpath; \
