@@ -1,5 +1,6 @@
 STAGE4 = $(shell find stage4/ -type f)
 VERSION ?= microserver
+ZYNQ ?= 7010
 
 %.img.bz2: %.img
 	bzip2 -kfp $<
@@ -10,10 +11,10 @@ stage4/boot/%: %
 	@test -d stage4/boot || mkdir -p stage4/boot
 	cp $< $@
 
-parallella-$(VERSION).img: stage3-armv7a_hardfp-latest.tar.bz2 stage4/boot/parallella.bit.bin stage4/boot/uImage stage4/boot/devicetree.dtb $(STAGE4)
+parallella-$(VERSION)-$(ZYNQ).img: stage3-armv7a_hardfp-latest.tar.bz2 stage4/boot/parallella.bit.bin stage4/boot/uImage stage4/boot/devicetree.dtb $(STAGE4)
 	./.gfwrapper.sh $@ $< stage4 || rm -f $@
 
-stage4/boot/parallella.bit.bin: parallella_e16_$(VERSION)_gpiose_7010.bit.bin
+stage4/boot/parallella.bit.bin: parallella_e16_$(VERSION)_gpiose_$(ZYNQ).bit.bin
 	@test -d stage4/boot || mkdir -p stage4/boot
 	cp $< $@
 
