@@ -37,3 +37,24 @@ stage3-armv7a_hardfp-latest.tar.bz2:
 clean:
 	rm -vfr stage4/boot
 	rm -vfr stage4/lib
+
+# Chroot support
+.PHONY: unpack prepare chroot
+
+unpack: stage3-armv7a_hardfp-latest.tar.bz2
+	chown -R 0:0 stage4
+	tar xkjp $< -C stage4
+
+prepare:
+	mountpoint -q stage4/proc    || mount -t proc proc stage4/proc
+	mountpoint -q stage4/dev     || mount --rbind /dev stage4/dev
+	mountpoint -q stage4/sys     || mount --rbind /sys stage4/sys
+	mountpoint -q stage4/tmp     || mount -t tmpfs tmpfs stage4/tmp
+	mountpoint -q stage4/var/tmp || mount -o size=90% -t tmpfs tmpfs stage4/var/tmp
+
+	cmp -s /etc/resolv.conf "stage4/etc/resolv.conf" || cp -L /etc/resolv.conf stage4/etc
+	env -i TERM=$$TERM HOME=$$HOME SHELL=/bin/bash $$(which chroot) stage4 /usr/sbin/env-update
+
+chroot: prepare
+	echo "# source /etc/profile"
+	env -i TERM=$$TERM HOME=$$HOME SHELL=/bin/bash $$(which chroot) stage4
