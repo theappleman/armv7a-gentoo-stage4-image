@@ -43,7 +43,7 @@ clean:
 
 unpack: stage3-armv7a_hardfp-latest.tar.bz2
 	chown -R 0:0 stage4
-	tar xkjp $< -C stage4
+	tar xkjpf $< -C stage4
 
 prepare:
 	mountpoint -q stage4/proc    || mount -t proc proc stage4/proc
