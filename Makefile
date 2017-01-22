@@ -15,7 +15,7 @@ parallella.img: stage3-armv7a_hardfp-latest.tar.bz2 stage4/boot/parallella.bit.b
 	./.gfwrapper.sh $@ $< stage4 || rm -f $@
 
 omaha.img: stage3-armv7a_hardfp-latest.tar.bz2 stage4/boot/$(BOARD).itb $(STAGE4)
-	./.gfomaha.sh $@ $< stage4 || rm -f $@
+	./.gfomaha.sh $@ $< stage4 $(BOARD) || rm -f $@
 
 stage4/boot/parallella.bit.bin: parallella_e16_$(VERSION)_gpiose_7010.bit.bin
 	@test -d stage4/boot || mkdir -p stage4/boot
