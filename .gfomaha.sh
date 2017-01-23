@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if test "$#" = 0; then
-	echo "$0 <img> <stage3> <stage4/> <device>" >&2
+	echo "$0 <img> <stage3> <stage4/>" >&2
 	exit 1
 fi
 gf=$(which guestfish)
@@ -23,8 +23,8 @@ gf=$(which guestfish)
 	tar-in "$2" / compress:bzip2 : \
 	mount /dev/sda3 /boot : \
 	-tar-in - / : \
-	copy-file-to-device /boot/$4.itb /dev/sda1 : \
-	copy-file-to-device /boot/$4.itb /dev/sda2 : \
+	copy-file-to-device /boot/omaha.kpart /dev/sda1 : \
+	copy-file-to-device /boot/omaha.kpart /dev/sda2 : \
 	umount /boot : umount / : \
 	resize2fs-M /dev/sda4
 
