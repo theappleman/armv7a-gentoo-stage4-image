@@ -4,5 +4,6 @@
 *.img
 *.bit.bin
 *.itb
+*.kpart
 uImage
 authorized_keys
