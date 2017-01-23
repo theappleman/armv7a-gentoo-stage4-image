@@ -13,7 +13,7 @@ stage4/boot/%: %
 parallella.img: stage3-armv7a_hardfp-latest.tar.bz2 stage4/boot/parallella.bit.bin stage4/boot/uImage stage4/boot/devicetree.dtb $(STAGE4)
 	./.gfwrapper.sh $@ $< stage4 || rm -f $@
 
-omaha.img: stage3-armv7a_hardfp-latest.tar.bz2 stage4/boot/omaha.kpart $(STAGE4)
+omaha.img: stage3-armv7a_hardfp-latest.tar.bz2 stage4/boot/omaha.kpart stage4/lib/firmware/mrvl/sd8797_uapsta.bin $(STAGE4)
 	./.gfomaha.sh $@ $< stage4 || rm -f $@
 
 stage4/boot/parallella.bit.bin: parallella_e16_$(VERSION)_gpiose_7010.bit.bin
