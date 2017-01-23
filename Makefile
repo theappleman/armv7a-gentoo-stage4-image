@@ -1,6 +1,5 @@
 STAGE4 = $(shell find stage4/ -type f)
 VERSION ?= microserver
-BOARD ?= spring
 
 %.img.bz2: %.img
 	bzip2 -kfp $<
@@ -30,10 +29,10 @@ stage3-armv7a_hardfp-latest.tar.bz2:
 	wget -c http://distfiles.gentoo.org/releases/arm/autobuilds/$$getpath; \
 	ln -s $$(basename $$getpath) $@
 
-$(BOARD).itb: omaha/$(BOARD).its omaha/kernel/arch/arm/boot/zImage $(wildcard omaha/kernel/arch/arm/boot/dts/*-$(BOARD).dtb)
+kernel.itb: omaha/kernel.its omaha/kernel/arch/arm/boot/zImage $(wildcard omaha/kernel/arch/arm/boot/dts/*.dtb)
 	mkimage -f $< $@
 
-omaha.kpart: $(BOARD).itb cmdline
+omaha.kpart: kernel.itb cmdline
 	vbutil_kernel \
 		--version 1 \
 		--pack $@ \
@@ -41,7 +40,7 @@ omaha.kpart: $(BOARD).itb cmdline
 		--keyblock /usr/share/vboot/devkeys/kernel.keyblock \
 		--signprivate /usr/share/vboot/devkeys/kernel_data_key.vbprivk \
 		--config cmdline \
-		--vmlinuz $(BOARD).itb \
+		--vmlinuz kernel.itb \
 		--bootloader cmdline
 
 cmdline:
