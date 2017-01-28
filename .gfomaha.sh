@@ -7,12 +7,12 @@ fi
 gf=$(which guestfish)
 
 (cd "$3"; tar c --owner=0 --group=0 .) | "$gf" \
-	-N "$1"=disk:2G -- \
+	-N "$1"=disk:7500M -- \
 	part-init /dev/sda gpt : \
 	part-add /dev/sda p 34 32768 : \
 	part-add /dev/sda p 32769 65536 : \
 	part-add /dev/sda p 65537 98304 : \
-	part-add /dev/sda p 98305 4194270 : \
+	part-add /dev/sda p 98305 -34 : \
 	part-set-gpt-type /dev/sda 1 FE3A2A5D-4F32-41A7-B725-ACCC3285A309 : \
 	part-set-gpt-type /dev/sda 2 FE3A2A5D-4F32-41A7-B725-ACCC3285A309 : \
 	mkfs ext2 /dev/sda3 : \
