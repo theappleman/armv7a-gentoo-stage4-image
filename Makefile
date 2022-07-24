@@ -1,4 +1,4 @@
-STAGE4 = $(shell find stage4/ -type f)
+OMAHA_RO = $(shell find omaha/root_overlay/ -type f)
 VERSION ?= microserver
 export KDIR ?= omaha/kernel
 
@@ -7,11 +7,11 @@ export KDIR ?= omaha/kernel
 	@echo
 	touch $@
 
-omaha.img: stage3-armv7a_hardfp-latest.tar.bz2 omaha.kpart /lib/firmware/mrvl/sd8797_uapsta.bin $(STAGE4)
-	./.gfomaha.sh $@ $< stage4 || rm -f $@
-
 parallella.img: stage3-armv7a_hardfp-latest.tar.bz2 stage4/boot/parallella.bit.bin stage4/boot/uImage stage4/boot/devicetree.dtb $(STAGE4)
 	./.gfwrapper.sh $@ $< stage4 || rm -f $@
+
+omaha.img: stage3-armv7a_hardfp-latest.tar.bz2 omaha.kpart /lib/firmware/mrvl/sd8797_uapsta.bin $(OMAHA_RO)
+	./.gfomaha.sh $@ $< omaha/root_overlay || rm -f $@
 
 stage4/boot/parallella.bit.bin: parallella_e16_$(VERSION)_gpiose_7010.bit.bin
 	@test -d stage4/boot || mkdir -p stage4/boot

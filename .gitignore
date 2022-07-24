@@ -1,4 +1,4 @@
-/stage4/boot
+boot/
 *.bz2
 *.dtb
 *.img
