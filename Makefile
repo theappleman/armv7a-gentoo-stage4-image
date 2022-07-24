@@ -1,26 +1,21 @@
 STAGE4 = $(shell find stage4/ -type f)
-VERSION ?= headless
-ZYNQ ?= 7010
+export VERSION ?= headless
+export ZYNQ ?= 7010
+export KDIR ?= parallella/parallella-linux
+export DTB  ?= zynq-parallella.dtb
+export FPGA ?= parallella/parabuntu/fpga_bitfiles
+NECESSARY = \
+	$(KDIR)/arch/arm/boot/uImage \
+	$(KDIR)/arch/arm/boot/dts/$(DTB) \
+	$(FPGA)/parallella_e16_$(VERSION)_gpiose_$(ZYNQ).bit.bin
 
 %.img.bz2: %.img
 	bzip2 -kfp $<
 	@echo
 	touch $@
 
-stage4/boot/%: %
-	@test -d stage4/boot || mkdir -p stage4/boot
-	cp $< $@
-
-parallella-$(VERSION)-$(ZYNQ).img: stage3-armv7a_hardfp-latest.tar.bz2 stage4/boot/parallella.bit.bin stage4/boot/uImage stage4/boot/devicetree.dtb $(STAGE4)
+parallella-$(VERSION)-$(ZYNQ).img: stage3-armv7a_hardfp-latest.tar.bz2 $(NECESSARY) $(STAGE4)
 	./.gfwrapper.sh $@ $< stage4 || rm -f $@
-
-stage4/boot/parallella.bit.bin: parallella/parabuntu/fpga_bitfiles/parallella_e16_$(VERSION)_gpiose_$(ZYNQ).bit.bin
-	@test -d stage4/boot || mkdir -p stage4/boot
-	cp $< $@
-
-stage4/boot/devicetree.dtb: zynq-parallella.dtb
-	@test -d stage4/boot || mkdir -p stage4/boot
-	cp $< $@
 
 stage3-armv7a_hardfp-latest.tar.bz2:
 	export getpath=$$(wget -q -O- https://distfiles.gentoo.org/releases/arm/autobuilds/latest-stage3-armv7a_hardfp-systemd.txt | awk 'NR==3{print$$1}'); \
