@@ -24,6 +24,9 @@ stage3-armv7a_hardfp-latest.tar.bz2:
 	wget -c http://distfiles.gentoo.org/releases/arm/autobuilds/$$getpath; \
 	ln -s $$(basename $$getpath) $@
 
+$(FPGA)/parallella_e16_microserver_gpiose_$(ZYNQ).bit.bin: $(FPGA)/parallella_e16_headless_gpiose_$(ZYNQ).bit.bin
+	cp -v $< $@
+
 .PHONY: clean
 clean:
 	rm -vfr stage4/boot
