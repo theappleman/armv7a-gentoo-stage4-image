@@ -23,8 +23,11 @@ gf=$(which guestfish)
 	tar-in "$2" / compress:bzip2 : \
 	mount /dev/sda3 /boot : \
 	-tar-in - / : \
+	copy-in omaha.kpart /boot : \
 	copy-file-to-device /boot/omaha.kpart /dev/sda1 : \
-	copy-file-to-device /boot/omaha.kpart /dev/sda2
+	copy-file-to-device /boot/omaha.kpart /dev/sda2 : \
+	copy-in /lib/firmware/mrvl/sd8797_uapsta.bin /lib/firmware/mrvl/ : \
+	copy-in ${KDIR}/tar-install/lib /
 
 cgpt add -i 1 -T 15 -P 15 -S 1 $1
 cgpt add -i 2 -T 8  -P 8  -S 1 $1

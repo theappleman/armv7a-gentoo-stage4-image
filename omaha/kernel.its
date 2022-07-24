@@ -6,7 +6,7 @@
 	images {
 		kernel@1{
 			description = "kernel";
-			data = /incbin/("kernel/arch/arm/boot/zImage");
+			data = /incbin/("arch/arm/boot/zImage");
 			type = "kernel_noload";
 			arch = "arm";
 			os = "linux";
@@ -16,7 +16,7 @@
 		};
 		fdt@1{
 			description = "exynos5250-snow.dtb";
-			data = /incbin/("kernel/arch/arm/boot/dts/exynos5250-snow.dtb");
+			data = /incbin/("arch/arm/boot/dts/exynos5250-snow.dtb");
 			type = "flat_dt";
 			arch = "arm";
 			compression = "none";
@@ -26,7 +26,7 @@
 		};
 		fdt@2{
 			description = "exynos5250-spring.dtb";
-			data = /incbin/("kernel/arch/arm/boot/dts/exynos5250-spring.dtb");
+			data = /incbin/("arch/arm/boot/dts/exynos5250-spring.dtb");
 			type = "flat_dt";
 			arch = "arm";
 			compression = "none";
