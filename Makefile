@@ -1,5 +1,5 @@
 STAGE4 = $(shell find stage4/ -type f)
-VERSION ?= microserver
+VERSION ?= headless
 ZYNQ ?= 7010
 
 %.img.bz2: %.img
@@ -14,18 +14,12 @@ stage4/boot/%: %
 parallella-$(VERSION)-$(ZYNQ).img: stage3-armv7a_hardfp-latest.tar.bz2 stage4/boot/parallella.bit.bin stage4/boot/uImage stage4/boot/devicetree.dtb $(STAGE4)
 	./.gfwrapper.sh $@ $< stage4 || rm -f $@
 
-stage4/boot/parallella.bit.bin: parallella_e16_$(VERSION)_gpiose_$(ZYNQ).bit.bin
+stage4/boot/parallella.bit.bin: parallella/parabuntu/fpga_bitfiles/parallella_e16_$(VERSION)_gpiose_$(ZYNQ).bit.bin
 	@test -d stage4/boot || mkdir -p stage4/boot
 	cp $< $@
 
 stage4/boot/devicetree.dtb: zynq-parallella-$(VERSION).dtb
 	@test -d stage4/boot || mkdir -p stage4/boot
-	cp $< $@
-
-parallella_e16_microserver_gpiose_70%0.bit.bin: parallella_e16_headless_gpiose_70%0.bit.bin
-	cp $< $@
-
-zynq-parallella-hdmi.dtb: zynq-parallella.dtb
 	cp $< $@
 
 stage3-armv7a_hardfp-latest.tar.bz2:
