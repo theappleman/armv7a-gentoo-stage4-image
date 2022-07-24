@@ -18,7 +18,7 @@ stage4/boot/parallella.bit.bin: parallella/parabuntu/fpga_bitfiles/parallella_e1
 	@test -d stage4/boot || mkdir -p stage4/boot
 	cp $< $@
 
-stage4/boot/devicetree.dtb: zynq-parallella-$(VERSION).dtb
+stage4/boot/devicetree.dtb: zynq-parallella.dtb
 	@test -d stage4/boot || mkdir -p stage4/boot
 	cp $< $@
 
