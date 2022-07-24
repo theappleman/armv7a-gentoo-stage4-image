@@ -1,9 +1,9 @@
 STAGE4 = $(shell find stage4/ -type f)
 export VERSION ?= headless
 export ZYNQ ?= 7010
-export KDIR ?= parallella/parallella-linux
+export KDIR ?= support/linux
 export DTB  ?= zynq-parallella.dtb
-export FPGA ?= parallella/parabuntu/fpga_bitfiles
+export FPGA ?= support/parabuntu/fpga_bitfiles
 NECESSARY = \
 	$(KDIR)/arch/arm/boot/uImage \
 	$(KDIR)/arch/arm/boot/dts/$(DTB) \
