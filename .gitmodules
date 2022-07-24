@@ -4,3 +4,7 @@
 [submodule "parallella/parallella-linux"]
 	path = support/linux
 	url = https://github.com/parallella/parallella-linux
+[submodule "omaha/kernel"]
+	path = omaha/kernel
+	url = https://chromium.googlesource.com/chromiumos/third_party/kernel
+	branch = chromeos-4.4
