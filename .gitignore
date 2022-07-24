@@ -7,3 +7,5 @@
 *.kpart
 uImage
 authorized_keys
+/cmdline
+wpa_supplicant.conf
