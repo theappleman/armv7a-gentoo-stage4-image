@@ -13,6 +13,4 @@ gf=$(which guestfish)
 	mount /dev/sda2 / : \
 	tar-in "$2" / compress:bzip2 : \
 	mount /dev/sda1 /boot : \
-	-tar-in - / : \
-	umount /boot : umount / : \
-	resize2fs-M /dev/sda2
+	-tar-in - /
