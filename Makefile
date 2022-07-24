@@ -4,7 +4,9 @@ export ZYNQ ?= 7010
 export KDIR ?= support/linux
 export DTB  ?= zynq-parallella.dtb
 export FPGA ?= support/parabuntu/fpga_bitfiles
+SSH_KEY ?= stage4/root/.ssh/authorized_keys
 NECESSARY = \
+	$(SSH_KEY) \
 	$(KDIR)/arch/arm/boot/uImage \
 	$(KDIR)/arch/arm/boot/dts/$(DTB) \
 	$(FPGA)/parallella_e16_$(VERSION)_gpiose_$(ZYNQ).bit.bin
