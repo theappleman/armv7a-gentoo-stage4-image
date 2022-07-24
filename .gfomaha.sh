@@ -24,9 +24,7 @@ gf=$(which guestfish)
 	mount /dev/sda3 /boot : \
 	-tar-in - / : \
 	copy-file-to-device /boot/omaha.kpart /dev/sda1 : \
-	copy-file-to-device /boot/omaha.kpart /dev/sda2 : \
-	umount /boot : umount / : \
-	resize2fs-M /dev/sda4
+	copy-file-to-device /boot/omaha.kpart /dev/sda2
 
 cgpt add -i 1 -T 15 -P 15 -S 1 $1
 cgpt add -i 2 -T 8  -P 8  -S 1 $1
